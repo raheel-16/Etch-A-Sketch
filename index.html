@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Etch-A-Sketch</title>
+	<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<h2>Etch-A-Sketch</h2>
+	<button id="button">Black</button>
+	<button id="whiteButton">White</button>
+	<button id="randomButton">Random Colour</button>
+	<div class="slideContanier">
+		<input type="range" min="0" max="99" value="16" id="mySlider">
+		<p>Value: <span id="demo"></span></p>
+	
+	<div id="container">
+	</div>
+	<div class="cursor">
+	</div>
+
+<script>
+
+const container = document.getElementById("container");
+const button = document.getElementById('button'); 
+gridItems = document.querySelectorAll(".grid-item");
+const eraser = document.getElementById("whiteButton");
+const colour = document.getElementById("randomButton");
+
+
+function runEvent(e, newRows) {
+	newRows.style.background = "white";
+}
+
+function newEvent(e, newRows) {
+	newRows.style.background = "black";
+}
+
+// Slider
+const slider = document.getElementById("mySlider");
+const output = document.getElementById("demo");
+output.innerHTML = slider.value;
+
+slider.oninput = function() {
+  let gridSize = this.value;
+  output.innerHTML = gridSize;
+  newRows(gridSize, gridSize);
+};
+
+// Resizing the grids according to the slider
+function newRows(gridSize) {
+  container.innerHTML = "";
+  container.style.setProperty('--grid-rows', gridSize);
+  container.style.setProperty('--grid-cols', gridSize);
+  for (i = 0; i < (gridSize * gridSize); i++) {
+    let div = document.createElement("div");
+    container.appendChild(div).className = "grid-item";
+
+    // Add event listeners to grid item
+    div.addEventListener('mouseover', function(e) {
+      runEvent(e, div);
+    });
+    div.addEventListener('mouseout', function(e) {
+      newEvent(e, div);
+    });
+  };
+
+  // Update grid items
+  gridItems = document.querySelectorAll(".grid-item");
+}
+
+
+// Default grid size
+newRows(16,16);
+
+
+
+
+</script>
+</body>
+</html>
