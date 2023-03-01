@@ -1,0 +1,26 @@
+#container {
+    display: grid;
+    gap: 1px;
+    background-color: lightgrey;
+    grid-template-rows: repeat(var(--grid-rows), 1fr);
+    grid-template-columns: repeat(var(--grid-cols), 1fr);
+
+
+}
+
+.grid-item {
+    border: 1px solid black;
+    padding: 1em;
+    transition: background-color 0.5s;
+}
+
+h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    background-color: orange;
+
+}
